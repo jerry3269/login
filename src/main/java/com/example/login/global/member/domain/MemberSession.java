@@ -1,4 +1,4 @@
-package com.example.login.session.member.domain;
+package com.example.login.global.member.domain;
 
 import lombok.Builder;
 
@@ -8,6 +8,8 @@ public record MemberSession(
         String userId,
         String password
         ){
+
+    public static final String MEMBER_SESSION = "MemberSession";
 
     @Builder
     public static MemberSession of(Long id, String username, String userId, String password) {

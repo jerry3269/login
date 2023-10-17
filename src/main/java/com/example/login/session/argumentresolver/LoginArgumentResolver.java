@@ -1,7 +1,7 @@
 package com.example.login.session.argumentresolver;
 
-import com.example.login.session.member.domain.MemberSession;
-import com.example.login.session.member.exception.MemberUnauthorizedException;
+import com.example.login.global.member.domain.MemberSession;
+import com.example.login.global.member.exception.MemberUnauthorizedException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +11,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import static com.example.login.session.member.domain.constant.LoginStaticField.MEMBER_SESSION;
+import static com.example.login.global.member.domain.MemberSession.MEMBER_SESSION;
 
 @Slf4j
 public class LoginArgumentResolver implements HandlerMethodArgumentResolver {

@@ -1,7 +1,7 @@
 package com.example.login.session.interceptor.controller;
 
-import com.example.login.session.member.dto.LoginForm;
-import com.example.login.session.member.dto.SignUpForm;
+import com.example.login.global.member.dto.LoginForm;
+import com.example.login.global.member.dto.SignUpForm;
 import com.example.login.session.member.dto.MemberResponse;
 import com.example.login.session.member.service.LoginService;
 import com.example.login.session.member.service.MemberService;

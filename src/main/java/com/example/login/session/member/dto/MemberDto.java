@@ -1,6 +1,6 @@
 package com.example.login.session.member.dto;
 
-import com.example.login.session.member.domain.Member;
+import com.example.login.global.member.domain.Member;
 
 public record MemberDto(
         Long id,

@@ -1,9 +1,9 @@
 package com.example.login.session.argumentresolver.controller;
 
 import com.example.login.session.argumentresolver.Login;
-import com.example.login.session.member.domain.MemberSession;
-import com.example.login.session.member.dto.LoginForm;
-import com.example.login.session.member.dto.SignUpForm;
+import com.example.login.global.member.domain.MemberSession;
+import com.example.login.global.member.dto.LoginForm;
+import com.example.login.global.member.dto.SignUpForm;
 import com.example.login.session.member.dto.MemberResponse;
 import com.example.login.session.member.service.LoginService;
 import com.example.login.session.member.service.MemberService;

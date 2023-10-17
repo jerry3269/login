@@ -1,12 +1,12 @@
 package com.example.login.session.member.service;
 
-import com.example.login.session.member.domain.Member;
-import com.example.login.session.member.domain.MemberSession;
-import com.example.login.session.member.dto.SignUpForm;
+import com.example.login.global.member.domain.Member;
+import com.example.login.global.member.domain.MemberSession;
+import com.example.login.global.member.dto.SignUpForm;
+import com.example.login.global.member.exception.MemberDuplicationException;
+import com.example.login.global.member.exception.MemberNotFoundException;
+import com.example.login.global.member.repository.MemberRepository;
 import com.example.login.session.member.dto.MemberDto;
-import com.example.login.session.member.exception.MemberDuplicationException;
-import com.example.login.session.member.exception.MemberNotFoundException;
-import com.example.login.session.member.repository.MemberRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-import static com.example.login.session.member.domain.constant.LoginStaticField.MEMBER_SESSION;
+import static com.example.login.global.member.domain.MemberSession.MEMBER_SESSION;
 
 @Slf4j
 @RequiredArgsConstructor

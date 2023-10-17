@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import static com.example.login.session.member.domain.constant.LoginStaticField.MEMBER_SESSION;
+import static com.example.login.global.member.domain.MemberSession.MEMBER_SESSION;
 
 
 @Slf4j

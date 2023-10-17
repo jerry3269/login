@@ -1,4 +1,4 @@
-package com.example.login.session.member.exception;
+package com.example.login.global.member.exception;
 
 import com.example.login.global.exception.NotMatchException;
 

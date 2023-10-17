@@ -1,6 +1,6 @@
-package com.example.login.session.member.dto;
+package com.example.login.global.member.dto;
 
-import com.example.login.session.member.domain.Member;
+import com.example.login.global.member.domain.Member;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.security.crypto.password.PasswordEncoder;
