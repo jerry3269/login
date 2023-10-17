@@ -17,5 +17,11 @@ public class ErrorStaticField {
     public static final String INVALID_PASSWORD = "비밀번호가 올바르지 않습니다.";
     public static final String BINDING_ERROR = "잘못된 Form 형식입니다.";
     public static final String REQUEST_BODY_NOT_FOUND = "ReqeustBody에 입력된 내용이 없습니다.";
+    public static final String INVALID_REFRESH_TOKEN = "Refresh 토큰 인증에 실패하였습니다.";
+    public static final String INVALID_ACCESS_TOKEN = "Access 토큰 인증에 실패하였습니다.";
+    public static final String EXPIRED_REFRESH_TOKEN = "Refresh 토큰만료! 재로그인 하세요.";
+    public static final String EXPIRED_ACCESS_TOKEN = "Access 토큰만료! 재시도 하세요.";
+
+
 
 }
