@@ -1,14 +1,14 @@
 package com.example.login.session.member.service;
 
 
-import com.example.login.session.member.domain.Member;
-import com.example.login.session.member.domain.MemberSession;
-import com.example.login.session.member.dto.LoginForm;
-import com.example.login.session.member.dto.SignUpForm;
+import com.example.login.global.member.domain.Member;
+import com.example.login.global.member.domain.MemberSession;
+import com.example.login.global.member.dto.LoginForm;
+import com.example.login.global.member.dto.SignUpForm;
+import com.example.login.global.member.exception.MemberNotFoundException;
+import com.example.login.global.member.exception.MemberPasswordNotMatchException;
+import com.example.login.global.member.repository.MemberRepository;
 import com.example.login.session.member.dto.MemberDto;
-import com.example.login.session.member.exception.MemberNotFoundException;
-import com.example.login.session.member.exception.MemberPasswordNotMatchException;
-import com.example.login.session.member.repository.MemberRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.example.login.session.member.domain.constant.LoginStaticField.MEMBER_SESSION;
+import static com.example.login.global.member.domain.MemberSession.MEMBER_SESSION;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)

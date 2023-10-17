@@ -1,4 +1,4 @@
-package com.example.login.session.member.domain;
+package com.example.login.global.member.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

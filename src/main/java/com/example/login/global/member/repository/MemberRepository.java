@@ -1,6 +1,6 @@
-package com.example.login.session.member.repository;
+package com.example.login.global.member.repository;
 
-import com.example.login.session.member.domain.Member;
+import com.example.login.global.member.domain.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
