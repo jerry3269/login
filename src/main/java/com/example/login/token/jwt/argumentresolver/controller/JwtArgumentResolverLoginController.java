@@ -7,6 +7,7 @@ import com.example.login.token.jwt.argumentresolver.JwtLogin;
 import com.example.login.token.jwt.member.dto.MemberWithTokenResponse;
 import com.example.login.token.jwt.member.service.JwtLoginService;
 import com.example.login.token.jwt.member.service.JwtMemberService;
+import com.example.login.token.jwt.member.service.JwtProvider;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -20,6 +21,14 @@ public class JwtArgumentResolverLoginController {
 
     private final JwtLoginService jwtLoginService;
     private final JwtMemberService memberService;
+
+    @PostMapping("/token")
+    public String refresh(
+            @JwtLogin MemberSession memberSession,
+            HttpServletResponse response) {
+        jwtLoginService.refresh(memberSession, response);
+        return "Successful";
+    }
 
     @GetMapping("/get")
     public MemberWithTokenResponse get(@JwtLogin MemberSession memberSession) {

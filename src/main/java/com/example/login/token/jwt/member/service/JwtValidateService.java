@@ -20,6 +20,8 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 
+import static com.example.login.token.jwt.member.basic.JwtStaticField.BEARER;
+
 @RequiredArgsConstructor
 @Service
 public class JwtValidateService {
@@ -28,36 +30,24 @@ public class JwtValidateService {
     private final RefreshTokenRepository refreshTokenRepository;
     private final JwtProvider jwtProvider;
 
-    public Claims validateToken(HttpServletRequest request) {
-        String accessToken = request.getHeader("AccessToken");
-        byte[] decodedSecretKey = secretKey.getDecoded();
-
+    public Claims validateAccessToken(HttpServletRequest request) {
         try {
-            return Jwts.parserBuilder()
-                    .setSigningKey(decodedSecretKey)
-                    .build()
-                    .parseClaimsJws(accessToken)
-                    .getBody();
+            String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+            String token = authHeader.substring(BEARER.length());
+            return this.validateToken(token);
         } catch (ExpiredJwtException e) {
-            Claims claims = validateRefreshToken(request);
-            throw new ExpiredAccessTokenException("Acess토큰 만료! 새로 발급된 AccessToken: " +
-                    jwtProvider.createAccessToken(claims.getSubject()));
+            throw new ExpiredAccessTokenException();
         } catch (Exception e) {
             throw new InvalidAccessTokenException();
         }
     }
 
-    private Claims validateRefreshToken(HttpServletRequest request) {
-        String refreshToken = getRefreshTokenFromRequest(request);
-        verifyValidRefreshToken(refreshToken);
-        byte[] decodedSecretKey = secretKey.getDecoded();
-
+    public Claims validateRefreshToken(HttpServletRequest request) {
         try {
-            return Jwts.parserBuilder()
-                    .setSigningKey(decodedSecretKey)
-                    .build()
-                    .parseClaimsJws(refreshToken)
-                    .getBody();
+            String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+            String token = authHeader.substring(BEARER.length());
+            this.verifyValidRefreshToken(token);
+            return this.validateToken(token);
         } catch (ExpiredJwtException e) {
             throw new ExpiredRefreshTokenException();
         } catch (Exception e) {
@@ -65,13 +55,14 @@ public class JwtValidateService {
         }
     }
 
-    private String getRefreshTokenFromRequest(HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
-        return Arrays.stream(cookies)
-                .filter(cookie -> cookie.getName().equals(HttpHeaders.SET_COOKIE))
-                .map(Cookie::getValue)
-                .findFirst()
-                .orElseThrow(InvalidRefreshTokenException::new);
+    private Claims validateToken(String token) {
+        byte[] decodedSecretKey = secretKey.getDecoded();
+
+        return Jwts.parserBuilder()
+                .setSigningKey(decodedSecretKey)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 
     private void verifyValidRefreshToken(String refreshToken) {

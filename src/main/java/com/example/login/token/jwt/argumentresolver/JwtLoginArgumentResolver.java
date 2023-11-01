@@ -15,6 +15,8 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
+import static com.example.login.token.jwt.member.basic.JwtStaticField.REFRESH_URL;
+
 @RequiredArgsConstructor
 @Slf4j
 public class JwtLoginArgumentResolver implements HandlerMethodArgumentResolver {
@@ -35,9 +37,16 @@ public class JwtLoginArgumentResolver implements HandlerMethodArgumentResolver {
         log.info("JwtLoginArgumentResolver resolveArgument 실행");
         HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
 
-        Claims claims = jwtValidateService.validateToken(request);
+        Claims claims = this.getClaims(request);
         String userId = claims.getSubject();
         Member member = memberRepository.findByUserId(userId).orElseThrow(MemberNotFoundException::new);
         return MemberSession.from(member);
+    }
+
+    private Claims getClaims(HttpServletRequest request) {
+        if (!REFRESH_URL.equals(request.getRequestURI())) {
+            return jwtValidateService.validateAccessToken(request);
+        }
+        return jwtValidateService.validateRefreshToken(request);
     }
 }
