@@ -9,6 +9,7 @@ import com.example.login.global.member.exception.MemberNotFoundException;
 import com.example.login.global.member.exception.MemberPasswordNotMatchException;
 import com.example.login.global.member.repository.MemberRepository;
 import com.example.login.token.jwt.member.dto.MemberWithTokenDto;
+import com.example.login.token.jwt.member.provider.JwtProvider;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

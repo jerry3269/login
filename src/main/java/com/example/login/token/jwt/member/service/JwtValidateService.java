@@ -6,17 +6,16 @@ import com.example.login.token.jwt.member.exception.ExpiredAccessTokenException;
 import com.example.login.token.jwt.member.exception.ExpiredRefreshTokenException;
 import com.example.login.token.jwt.member.exception.InvalidAccessTokenException;
 import com.example.login.token.jwt.member.exception.InvalidRefreshTokenException;
+import com.example.login.token.jwt.member.provider.JwtProvider;
 import com.example.login.token.jwt.member.repository.RefreshTokenRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 

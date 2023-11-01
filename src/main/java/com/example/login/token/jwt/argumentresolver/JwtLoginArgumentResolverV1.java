@@ -19,7 +19,7 @@ import static com.example.login.token.jwt.member.basic.JwtStaticField.REFRESH_UR
 
 @RequiredArgsConstructor
 @Slf4j
-public class JwtLoginArgumentResolver implements HandlerMethodArgumentResolver {
+public class JwtLoginArgumentResolverV1 implements HandlerMethodArgumentResolver {
 
     private final MemberRepository memberRepository;
     private final JwtValidateService jwtValidateService;
@@ -27,7 +27,7 @@ public class JwtLoginArgumentResolver implements HandlerMethodArgumentResolver {
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
         log.info("JwtLoginArgumentResolver supportsParameter 실행");
-        boolean hasLoginAnnotation = parameter.hasParameterAnnotation(JwtLogin.class);
+        boolean hasLoginAnnotation = parameter.hasParameterAnnotation(JwtLoginV1.class);
         boolean hasMemberSessionType = MemberSession.class.isAssignableFrom(parameter.getParameterType());
         return hasLoginAnnotation && hasMemberSessionType;
     }
@@ -44,7 +44,7 @@ public class JwtLoginArgumentResolver implements HandlerMethodArgumentResolver {
     }
 
     private Claims getClaims(HttpServletRequest request) {
-        if (!REFRESH_URL.equals(request.getRequestURI())) {
+        if (!request.getRequestURI().contains(REFRESH_URL)) {
             return jwtValidateService.validateAccessToken(request);
         }
         return jwtValidateService.validateRefreshToken(request);
