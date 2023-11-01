@@ -1,4 +1,4 @@
-package com.example.login.token.jwt.member.service;
+package com.example.login.token.jwt.member.provider;
 
 import com.example.login.token.jwt.member.dto.SecretKey;
 import com.example.login.token.jwt.member.repository.RefreshTokenRepository;
