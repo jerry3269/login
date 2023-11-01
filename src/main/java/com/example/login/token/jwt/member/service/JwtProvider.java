@@ -2,6 +2,7 @@ package com.example.login.token.jwt.member.service;
 
 import com.example.login.token.jwt.member.dto.SecretKey;
 import com.example.login.token.jwt.member.repository.RefreshTokenRepository;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.util.Date;
 import java.util.UUID;
+
+import static com.example.login.token.jwt.member.basic.JwtStaticField.BEARER;
 
 @RequiredArgsConstructor
 @Service
@@ -47,13 +50,8 @@ public class JwtProvider {
         return refreshTokenRepository.save(userId, refreshToken);
     }
 
-    public void setCookie(HttpServletResponse response, String refreshToken) {
-        ResponseCookie cookie = ResponseCookie.from(HttpHeaders.SET_COOKIE, refreshToken)
-                .httpOnly(true)
-                .secure(true)
-                .maxAge(Duration.ofDays(30))
-                .build();
-        response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+    public void setAuthorizationHeader(HttpServletResponse response, String accessToken) {
+        response.setHeader(HttpHeaders.AUTHORIZATION, BEARER + accessToken);
     }
 
     public void expiredRefreshToken(String userId) {

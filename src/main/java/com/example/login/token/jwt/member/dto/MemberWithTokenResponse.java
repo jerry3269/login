@@ -7,7 +7,7 @@ import lombok.Builder;
 public record MemberWithTokenResponse(
         String username,
         String userId,
-        String accessToken
+        String refreshToken
 ) {
 
     @Builder
@@ -18,7 +18,7 @@ public record MemberWithTokenResponse(
         return MemberWithTokenResponse.builder()
                 .username(dto.username())
                 .userId(dto.userId())
-                .accessToken(dto.accessToken()).build();
+                .refreshToken(dto.refreshToken()).build();
     }
 
     public static MemberWithTokenResponse withoutToken(MemberWithTokenDto dto) {

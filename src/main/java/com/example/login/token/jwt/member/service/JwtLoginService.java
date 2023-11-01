@@ -35,10 +35,15 @@ public class JwtLoginService {
         if (passwordEncoder.matches(loginForm.password(), member.getPassword())) {
             String accessToken = jwtProvider.createAccessToken(loginForm.userId());
             String refreshToken = jwtProvider.createRefreshToken(loginForm.userId());
-            jwtProvider.setCookie(response, refreshToken);
-            return MemberWithTokenDto.from(member, accessToken);
+            jwtProvider.setAuthorizationHeader(response, accessToken);
+            return MemberWithTokenDto.from(member, refreshToken);
         }
         throw new MemberPasswordNotMatchException();
+    }
+
+    public void refresh(MemberSession memberSession, HttpServletResponse response) {
+        String accessToken = jwtProvider.createAccessToken(memberSession.userId());
+        jwtProvider.setAuthorizationHeader(response, accessToken);
     }
 
     public void logout(MemberSession memberSession) {
